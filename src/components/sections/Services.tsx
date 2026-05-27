@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { services } from "@/lib/data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { revealOnScroll } from "@/lib/animate";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 export function Services() {
@@ -15,18 +16,7 @@ export function Services() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".service-card", {
-        y: 40,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      revealOnScroll(sectionRef.current, ".service-card");
     }, sectionRef);
 
     return () => ctx.revert();

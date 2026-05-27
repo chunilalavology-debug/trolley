@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { revealOnMount } from "@/lib/animate";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 const socials = [
@@ -21,14 +22,7 @@ export function Hero() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".hero-reveal", {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.2,
-      });
+      revealOnMount(".hero-reveal", { delay: 0.15, duration: 0.9 });
     }, sectionRef);
 
     return () => ctx.revert();

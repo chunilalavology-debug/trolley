@@ -2,28 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { navLinks, contactInfo } from "@/lib/data";
+import { revealOnMount } from "@/lib/animate";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     registerGsapPlugins();
-    gsap.from(".header-item", {
-      y: -16,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.06,
-      ease: "power3.out",
-      delay: 0.1,
-    });
+    if (!headerRef.current) return;
+    const ctx = gsap.context(() => {
+      revealOnMount(".header-item", {
+        y: -16,
+        duration: 0.7,
+        delay: 0.1,
+      });
+    }, headerRef);
+    return () => ctx.revert();
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-white/95 backdrop-blur-md">
+    <header ref={headerRef} className="sticky top-0 z-50 border-b border-border/60 bg-white/95 backdrop-blur-md">
       <div className="section-container flex items-center justify-between gap-4 py-4 lg:py-5">
         <Link href="#home" className="header-item shrink-0" aria-label="E-Trolley home">
           <Image

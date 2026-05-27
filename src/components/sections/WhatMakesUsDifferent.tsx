@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { differentSlides } from "@/lib/data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { revealOnScroll } from "@/lib/animate";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 export function WhatMakesUsDifferent() {
@@ -17,18 +18,7 @@ export function WhatMakesUsDifferent() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".diff-reveal", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      revealOnScroll(sectionRef.current, ".diff-reveal");
     }, sectionRef);
 
     return () => ctx.revert();

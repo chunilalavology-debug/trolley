@@ -14,18 +14,23 @@ export function RenownedClients() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".client-card", {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
+      gsap.fromTo(
+        ".client-card",
+        { y: 30, opacity: 0, scale: 0.92 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 82%",
+            toggleActions: "play none none none",
+          },
         },
-      });
+      );
     }, sectionRef);
 
     return () => ctx.revert();

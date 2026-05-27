@@ -44,6 +44,18 @@ body {
   overflow-x: hidden;
 }
 
+/* Keep content visible before/after GSAP runs */
+.header-item,
+.hero-reveal,
+.step-card,
+.diff-reveal,
+.service-card,
+.client-card,
+.design-card,
+.support-card {
+  opacity: 1;
+}
+
 ::selection {
   background: var(--teal);
   color: #fff;

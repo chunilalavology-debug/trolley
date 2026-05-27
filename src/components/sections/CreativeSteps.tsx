@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { creativeSteps } from "@/lib/data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { revealOnScroll } from "@/lib/animate";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 const icons: Record<string, ReactNode> = {
@@ -48,18 +49,7 @@ export function CreativeSteps() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".step-card", {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      revealOnScroll(sectionRef.current, ".step-card");
     }, sectionRef);
 
     return () => ctx.revert();

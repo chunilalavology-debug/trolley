@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { designCategories } from "@/lib/data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { revealOnScroll } from "@/lib/animate";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 export function DistinctiveDesigns() {
@@ -14,18 +15,7 @@ export function DistinctiveDesigns() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".design-card", {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      revealOnScroll(sectionRef.current, ".design-card");
     }, sectionRef);
 
     return () => ctx.revert();

@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <SmoothScroll>
           <Header />
-          <main>{children}</main>
+          <main className="min-h-screen w-full">{children}</main>
         </SmoothScroll>
       </body>
     </html>
