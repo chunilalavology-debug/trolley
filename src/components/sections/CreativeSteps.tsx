@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { creativeSteps } from "@/lib/data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { revealOnScroll } from "@/lib/animate";
@@ -35,10 +34,10 @@ const icons: Record<string, ReactNode> = {
 };
 
 const positions: Record<string, string> = {
-  "left-top": "lg:col-start-1 lg:row-start-1",
-  "left-bottom": "lg:col-start-1 lg:row-start-2 lg:mt-8",
-  "center-top": "lg:col-start-2 lg:row-start-1",
-  "right-bottom": "lg:col-start-3 lg:row-start-2",
+  "left-top": "lg:absolute lg:left-0 lg:top-[146px]",
+  "left-bottom": "lg:absolute lg:left-[244px] lg:top-[146px]",
+  "center-top": "lg:absolute lg:left-[488px] lg:top-0",
+  "right-bottom": "lg:absolute lg:left-[732px] lg:top-[146px]",
 };
 
 export function CreativeSteps() {
@@ -56,55 +55,57 @@ export function CreativeSteps() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-background py-16 md:py-24" id="steps">
+    <section ref={sectionRef} className="bg-background py-14 md:py-20" id="steps">
       <div className="section-container">
-        <SectionLabel className="mb-6 justify-center">Build a store</SectionLabel>
-        <h2 className="mb-12 text-center text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-          Our Creative Steps
+        <SectionLabel className="mb-4 w-fit">Build a store</SectionLabel>
+        <h2 className="mb-10 text-left text-5xl font-bold leading-[1.06] text-foreground lg:text-[54px]">
+          Our
+          <br />
+          Creative Steps
         </h2>
 
-        <div className="relative grid gap-6 lg:grid-cols-3 lg:grid-rows-2 lg:gap-8 lg:min-h-[420px]">
+        <div className="relative grid gap-4 lg:block lg:min-h-[420px]">
           {creativeSteps.map((step) => (
             <article
               key={step.number}
-              className={`step-card card-shadow relative rounded-2xl bg-card p-6 md:p-8 ${positions[step.position]}`}
+              className={`step-card card-shadow relative h-[210px] w-full rounded-2xl bg-card p-7 md:w-[228px] ${positions[step.position]}`}
             >
-              <div className="mb-4">{icons[step.icon]}</div>
-              <span className="absolute right-6 top-6 text-5xl font-bold text-foreground/10 md:text-6xl">
+              <div className="mb-4 opacity-80">{icons[step.icon]}</div>
+              <span className="absolute right-6 top-4 text-6xl font-bold leading-none text-teal/35">
                 {step.number}
               </span>
-              <p className="relative z-10 max-w-[220px] text-sm leading-relaxed text-muted md:text-base">
+              <p className="relative z-10 max-w-[180px] pt-8 text-[17px] font-semibold leading-[1.2] text-[#4e5454]">
                 {step.text}
               </p>
             </article>
           ))}
 
-          <div className="step-card flex items-center justify-center lg:col-start-2 lg:row-start-2 lg:row-span-1">
+          <div className="step-card flex items-center justify-center lg:absolute lg:left-[528px] lg:top-[238px]">
             <Link
               href="#contact"
-              className="flex h-36 w-36 items-center justify-center rounded-full border-2 border-teal bg-white text-center text-lg font-bold text-teal shadow-md transition-transform hover:scale-105 md:h-44 md:w-44"
+              className="flex h-36 w-36 items-center justify-center rounded-full border border-teal bg-[#f7f7f5] text-center text-[41px] font-semibold leading-[1.03] text-teal transition-transform hover:scale-105"
             >
               Let&apos;s Start Now!
             </Link>
           </div>
         </div>
 
-        <div className="mt-16 grid items-start gap-8 lg:grid-cols-2">
-          <div className="relative">
-            <span className="mb-2 inline-block text-2xl" aria-hidden>😊</span>
-            <div className="relative inline-block">
-              <div className="absolute -left-2 -top-2 h-12 w-24 rounded-full bg-teal/80 blur-sm" aria-hidden />
-              <span className="relative z-10 inline-block rounded-full border border-border bg-white px-5 py-2.5 text-sm font-medium shadow-sm">
-                No technical skills required.
-              </span>
-            </div>
+        <div className="mt-12 grid items-center gap-8 lg:mt-16 lg:grid-cols-[300px_1fr]">
+          <div className="relative h-[92px]">
+            <span className="absolute left-[94px] top-0 text-[28px]" aria-hidden>
+              💬
+            </span>
+            <div className="absolute left-[54px] top-[30px] h-10 w-28 -rotate-[18deg] rounded-sm bg-teal" aria-hidden />
+            <span className="absolute left-0 top-[36px] inline-flex h-12 items-center rounded-full border border-border bg-white px-6 text-[11px] italic text-[#4f5454] shadow-sm">
+              No technical skills required.
+            </span>
           </div>
-          <p className="text-sm leading-relaxed text-muted md:text-base">
+          <p className="max-w-[600px] text-sm leading-relaxed text-[#4e5454] md:text-[16px]">
             Simple or Professional? Choose the plan that best suits your business, based on the level of features you require, then browse the ready-made designs and choose the one that suits you. All designs are available to all users at no additional charge. Or request your own custom design. Fill out the basic information and complete the payment in a quick and secure manner.
           </p>
         </div>
 
-        <SectionLabel className="mt-16 justify-center">Our Services</SectionLabel>
+        <SectionLabel className="mt-12 justify-center">Our Services</SectionLabel>
       </div>
     </section>
   );
