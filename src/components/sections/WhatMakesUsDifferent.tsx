@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { differentSlides } from "@/lib/data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { revealOnScroll } from "@/lib/animate";
+import { assetPath } from "@/lib/asset";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 export function WhatMakesUsDifferent() {
@@ -69,7 +70,7 @@ export function WhatMakesUsDifferent() {
       <div className="relative mt-16 bg-sage-light/40 py-4">
         <div className="section-container flex items-center justify-between">
           <Image
-            src="/logo.png"
+            src={assetPath("/logo.png")}
             alt=""
             width={120}
             height={50}

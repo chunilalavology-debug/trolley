@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/asset";
 import { contactInfo, footerLinks } from "@/lib/data";
 
 export function Footer() {
@@ -10,7 +11,7 @@ export function Footer() {
           <div>
             <p className="mb-3 text-sm text-muted">Etrolley</p>
             <Image
-              src="/logo.png"
+              src={assetPath("/logo.png")}
               alt="E-Trolley"
               width={120}
               height={50}

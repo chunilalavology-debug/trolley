@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { navLinks, contactInfo } from "@/lib/data";
 import { revealOnMount } from "@/lib/animate";
+import { assetPath } from "@/lib/asset";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 export function Header() {
@@ -30,7 +31,7 @@ export function Header() {
       <div className="section-container flex h-full items-center justify-between gap-6">
         <Link href="#home" className="header-item flex h-full shrink-0 items-center" aria-label="E-Trolley home">
           <Image
-            src="/logo.png"
+            src={assetPath("/logo.png")}
             alt="E-Trolley"
             width={196}
             height={83}

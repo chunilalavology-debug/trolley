@@ -5,6 +5,9 @@ const basePath = isGithubPages ? "/trolley" : "";
 
 const nextConfig: NextConfig = {
   output: "export",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   ...(basePath
     ? {
         basePath,

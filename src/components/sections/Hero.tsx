@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { revealOnMount } from "@/lib/animate";
+import { assetPath } from "@/lib/asset";
 import { registerGsapPlugins } from "@/lib/gsap";
 
 const socials = [
@@ -87,7 +88,7 @@ export function Hero() {
           <div className="hero-reveal relative lg:col-span-4">
             <div className="relative mx-auto max-w-[460px] lg:mx-0 lg:ml-auto">
               <Image
-                src="/laptop.png"
+                src={assetPath("/laptop.png")}
                 alt="Laptop showing online store"
                 width={620}
                 height={470}
