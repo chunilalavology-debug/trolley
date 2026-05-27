@@ -44,7 +44,7 @@ export function Hero() {
           <div className="hero-reveal lg:col-span-3">
             <div className="card-shadow inline-block rounded-lg border border-border bg-white p-4">
               <Image
-                src="/qr.png"
+                src={assetPath("/qr.png")}
                 alt="E-Trolley QR code"
                 width={250}
                 height={250}
