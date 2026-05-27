@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #080808;
+  --foreground: #f5f2eb;
+  --muted: #9a9690;
+  --accent: #e85d2a;
+  --accent-soft: #ff7a4d;
+  --surface: #111111;
+  --surface-elevated: #1a1a1a;
+  --border: rgba(245, 242, 235, 0.08);
+  --cream: #f5f2eb;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-cream: var(--cream);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-syne);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+.section-padding {
+  @apply px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 2xl:px-32;
+}
+
+.display-heading {
+  font-family: var(--font-syne), system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(245, 242, 235, 0.25);
+  color: transparent;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+}
+
+.creative-card {
+  flex: 0 0 auto;
+}
+
+/* Hide scrollbar for horizontal sections */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Footer parallax reveal */
+.footer-reveal-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-parallax {
+  position: relative;
+  z-index: 2;
+  margin-top: -20vh;
+}
+
+@media (min-width: 1024px) {
+  .footer-parallax {
+    margin-top: -30vh;
+  }
 }

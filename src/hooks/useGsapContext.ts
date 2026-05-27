@@ -1,0 +1,23 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { registerGsapPlugins } from "@/lib/gsap";
+
+export function useGsapContext(
+  callback: (ctx: gsap.Context) => void,
+  deps: unknown[] = [],
+) {
+  const scopeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    registerGsapPlugins();
+    if (!scopeRef.current) return;
+
+    const ctx = gsap.context(callback, scopeRef);
+    return () => ctx.revert();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+
+  return scopeRef;
+}
