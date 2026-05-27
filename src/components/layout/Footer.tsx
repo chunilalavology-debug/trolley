@@ -1,134 +1,108 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { navLinks } from "@/lib/data";
-import { registerGsapPlugins } from "@/lib/gsap";
+import { contactInfo, footerLinks } from "@/lib/data";
 
 export function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    registerGsapPlugins();
-    if (!footerRef.current || !contentRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(contentRef.current!.children, {
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      gsap.to(footerRef.current, {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.2,
-        },
-      });
-    }, footerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <footer
-      ref={footerRef}
-      className="footer-parallax relative overflow-hidden rounded-t-[2rem] bg-surface-elevated md:rounded-t-[3rem]"
-      aria-label="Site footer"
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
-
-      <div
-        ref={contentRef}
-        className="section-padding relative py-16 md:py-24 lg:py-32"
-      >
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-8">
+    <footer id="contact" className="bg-background pb-8 pt-4">
+      <div className="section-container">
+        <div className="grid gap-10 border-b border-border pb-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div>
-            <Link
-              href="/"
-              className="display-heading text-5xl text-foreground sm:text-6xl md:text-7xl lg:text-8xl"
-            >
-              Etrolley
-            </Link>
-            <p className="mt-6 max-w-md text-muted leading-relaxed">
-              Your strategic partner in advertising, merchandising, and brand
-              experiences that make your mark unforgettable.
-            </p>
+            <p className="mb-3 text-sm text-muted">Etrolley</p>
+            <Image
+              src="/logo.png"
+              alt="E-Trolley"
+              width={120}
+              height={50}
+              className="h-16 w-auto rounded-xl"
+            />
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-2">
-            <div>
-              <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted">
-                Navigation
-              </p>
-              <ul className="space-y-3">
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-foreground/80 transition-colors duration-300 hover:text-accent"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          <div>
+            <h3 className="mb-4 font-bold">Quick Links</h3>
+            <ul className="space-y-2 text-sm text-muted">
+              {footerLinks.quick.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="hover:text-teal">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <h3 className="mb-3 mt-8 font-bold">Social</h3>
+            <div className="flex gap-3">
+              {footerLinks.social.map((s) => (
+                <a
+                  key={s}
+                  href="#"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-xs text-muted hover:border-teal hover:text-teal"
+                  aria-label={s}
+                >
+                  {s[0]}
+                </a>
+              ))}
             </div>
-            <div>
-              <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted">
-                Contact
-              </p>
-              <ul className="space-y-3 text-foreground/80">
-                <li>
-                  <a
-                    href="mailto:hello@etrolley.com"
-                    className="transition-colors hover:text-accent"
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-bold">Site Map</h3>
+            <ul className="space-y-2 text-sm">
+              {footerLinks.siteMap.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className={
+                      "active" in link && link.active
+                        ? "font-medium text-teal"
+                        : "text-muted hover:text-teal"
+                    }
                   >
-                    hello@etrolley.com
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-bold">Let&apos;s keep in touch</h3>
+            <ul className="space-y-3 text-sm text-muted">
+              <li className="flex items-start gap-2">
+                <span className="text-teal">📞</span>
+                <a href={`tel:${contactInfo.phone}`} className="hover:text-teal">
+                  {contactInfo.phone}
+                </a>
+              </li>
+              {contactInfo.emails.map((email) => (
+                <li key={email} className="flex items-start gap-2">
+                  <span className="text-teal">✉</span>
+                  <a href={`mailto:${email}`} className="hover:text-teal">
+                    {email}
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="tel:+573107719636"
-                    className="transition-colors hover:text-accent"
-                  >
-                    +57 310 771 9636
-                  </a>
-                </li>
-                <li className="text-muted">Colombia</li>
-              </ul>
-            </div>
+              ))}
+              <li className="flex items-start gap-2">
+                <span className="text-teal">📍</span>
+                <span>{contactInfo.address}</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted">
-            © {new Date().getFullYear()} Etrolley. All rights reserved.
+        <Link
+          href="#contact"
+          className="btn-teal-lg mt-8 flex w-full justify-center text-center"
+        >
+          build your store now
+        </Link>
+
+        <div className="mt-8 flex flex-col gap-4 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2025 E-trolley All Rights Reserved</p>
+          <p>
+            <Link href="#" className="hover:text-teal">Privacy Policy</Link>
+            {" / "}
+            <Link href="#" className="hover:text-teal">Terms & Condition</Link>
           </p>
-          <div className="flex gap-6">
-            {["Instagram", "LinkedIn", "Behance"].map((social) => (
-              <a
-                key={social}
-                href="#"
-                className="text-sm text-muted transition-colors duration-300 hover:text-accent"
-              >
-                {social}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

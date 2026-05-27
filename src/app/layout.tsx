@@ -1,38 +1,20 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const syne = Syne({
-  variable: "--font-syne",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
 export const metadata: Metadata = {
-  title: "Etrolley | Advertising & Merchandising Agency",
+  title: "E-Trolley | Your store ready in a minute",
   description:
-    "Premium advertising and merchandising agency. Brand identity, campaigns, custom merchandise, and digital experiences—from concept to delivery.",
-  keywords: [
-    "advertising agency",
-    "merchandising",
-    "branding",
-    "Colombia",
-    "creative agency",
-  ],
-  openGraph: {
-    title: "Etrolley | Advertising & Merchandising Agency",
-    description:
-      "Give life to your brand with products and campaigns that speak for you.",
-    type: "website",
-  },
+    "E-Trolley is a Qatari e-commerce platform. Build your online store in no more than a minute.",
+  keywords: ["E-Trolley", "e-commerce", "online store", "Qatar", "etrolley"],
 };
 
 export default function RootLayout({
@@ -41,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${syne.variable}`}>
+    <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
         <SmoothScroll>
           <Header />
