@@ -28,7 +28,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Build & Deploy
+## Build & Deploy (Vercel)
 
 ```bash
 npm run build
@@ -36,6 +36,20 @@ npm start
 ```
 
 Deploy to [Vercel](https://vercel.com) by connecting this repository. No extra environment variables required.
+
+## Deploy on GitHub Pages
+
+This project is configured for a GitHub project site at `/trolley/`.
+
+- Static export is enabled in `next.config.ts` via `output: "export"`.
+- GitHub Actions workflow is at `.github/workflows/deploy-pages.yml`.
+- On each push to `master`, Pages deploys the generated `out/` folder.
+
+After pushing:
+
+1. Go to repository **Settings → Pages**
+2. Set **Source** to **GitHub Actions**
+3. Wait for the **Deploy Next.js static export to GitHub Pages** action to finish
 
 ## Project Structure
 
